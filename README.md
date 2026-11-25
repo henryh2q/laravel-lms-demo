@@ -3,7 +3,7 @@
 A small learning management system built with **Laravel 13, Blade and MySQL**, made as a public portfolio piece.
 It is a demo with fictional courses, not client work.
 
-**Live demo:** _link added after deploy_ · One-click demo logins for admin, instructor and student on the login page
+**Live demo:** https://laravel-lms-demo-production.up.railway.app · One-click demo logins for admin, instructor and student on the login page
 (`admin@demo.test`, `instructor@demo.test`, `student@demo.test`, password `demo1234`).
 
 ## What it shows
