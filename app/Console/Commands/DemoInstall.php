@@ -21,6 +21,13 @@ class DemoInstall extends Command
 
         $this->call('migrate', ['--force' => true]);
 
+        // Demo data from before course photos existed: reseed once so the catalog gets its images.
+        if (Course::where('slug', 'laravel-basics')->whereNull('image_url')->exists()) {
+            $this->call('migrate:fresh', ['--force' => true, '--seed' => true]);
+
+            return self::SUCCESS;
+        }
+
         if (Course::count() === 0) {
             $this->call('db:seed', ['--force' => true]);
         }

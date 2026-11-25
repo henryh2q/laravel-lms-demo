@@ -15,6 +15,8 @@
         <div><label class="label" for="level">Level</label><select id="level" name="level" class="input">@foreach (['beginner', 'intermediate', 'advanced'] as $l)<option @selected(old('level', $course->level) === $l)>{{ $l }}</option>@endforeach</select></div>
         <div><label class="label" for="pass_score">Pass score (%)</label><input id="pass_score" name="pass_score" type="number" min="1" max="100" value="{{ old('pass_score', $course->pass_score) }}" class="input"></div>
         <div><label class="label" for="color">Colour</label><input id="color" name="color" type="color" value="{{ old('color', $course->color) }}" class="input h-10 p-1"></div>
+        <div class="sm:col-span-2"><label class="label" for="image_url">Cover photo (Unsplash URL)</label><input id="image_url" name="image_url" type="url" value="{{ old('image_url', $course->image_url) }}" placeholder="https://images.unsplash.com/photo-..." class="input"></div>
+        <div class="sm:col-span-2"><label class="label" for="image_credit">Photo credit (Name|username)</label><input id="image_credit" name="image_credit" value="{{ old('image_credit', $course->image_credit) }}" class="input"></div>
         <div><label class="label" for="instructor_id">Instructor</label><select id="instructor_id" name="instructor_id" class="input">@foreach ($instructors as $i)<option value="{{ $i->id }}" @selected(old('instructor_id', $course->instructor_id ?? auth()->id()) == $i->id)>{{ $i->name }}</option>@endforeach</select></div>
         <label class="flex items-center gap-2 self-end pb-2 text-sm"><input type="checkbox" name="is_published" value="1" @checked(old('is_published', $course->is_published))> Published</label>
     </div>

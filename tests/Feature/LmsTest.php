@@ -193,4 +193,17 @@ class LmsTest extends TestCase
     {
         $this->get(route('performance'))->assertOk()->assertSee('locustfile.py');
     }
+
+    public function test_course_photos_show_with_credit_and_only_unsplash_urls_are_accepted(): void
+    {
+        $course = Course::where('slug', 'laravel-basics')->sole();
+
+        $this->get(route('home'))->assertOk()->assertSee($course->imageSrc(640, 360));
+        $this->get(route('courses.show', $course))->assertOk()->assertSee('Christopher Gower');
+
+        $this->actingAs($this->user('admin'))->put(route('admin.courses.update', $course), [
+            'title' => ['en' => 'Laravel basics'], 'summary' => ['en' => 'x'], 'level' => 'beginner', 'color' => '#123456', 'pass_score' => 70,
+            'image_url' => 'https://evil.example.com/tracker.png',
+        ])->assertSessionHasErrors('image_url');
+    }
 }

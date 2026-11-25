@@ -20,7 +20,7 @@ class CourseController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.courses.form', ['course' => new Course(['level' => 'beginner', 'pass_score' => 70, 'color' => '#1f5fbf']), 'instructors' => $this->instructors($request)]);
+        return view('admin.courses.form', ['course' => new Course(['level' => 'beginner', 'pass_score' => 70, 'color' => '#e2603a']), 'instructors' => $this->instructors($request)]);
     }
 
     public function store(Request $request)
@@ -84,6 +84,9 @@ class CourseController extends Controller
             'level' => ['required', 'in:beginner,intermediate,advanced'],
             'color' => ['required', 'regex:/^#[0-9a-fA-F]{6}$/'],
             'pass_score' => ['required', 'integer', 'min:1', 'max:100'],
+            // Only Unsplash CDN photos, which the CSP allows; credit is "Name|username".
+            'image_url' => ['nullable', 'url', 'starts_with:https://images.unsplash.com/photo-', 'max:255'],
+            'image_credit' => ['nullable', 'string', 'max:120', 'regex:/^[^|]+\|[A-Za-z0-9_\-]+$/'],
             'instructor_id' => ['nullable', 'exists:users,id'],
         ]);
 

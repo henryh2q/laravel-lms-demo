@@ -17,7 +17,7 @@ class SecurityHeaders
 
         $csp = implode('; ', [
             "default-src 'self'",
-            "img-src 'self' data:",
+            "img-src 'self' data: https://images.unsplash.com",
             "style-src 'self' 'unsafe-inline'", // inline style attributes for per-product colours
             "script-src 'self'",
             "font-src 'self'",
